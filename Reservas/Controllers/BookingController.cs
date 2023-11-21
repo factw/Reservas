@@ -13,6 +13,6 @@ namespace Reservas.Controllers
             _bookingService = bookingService;
         }
         [HttpGet]
-        public List<DateTime> Index() => _bookingService.BookingAviable();
+        public List<DateTime> BookingDateAviable() => _bookingService.BookingAviable();
     }
 }
