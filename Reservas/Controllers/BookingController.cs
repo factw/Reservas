@@ -15,5 +15,8 @@ namespace Reservas.Controllers
         }
         [HttpGet]
         public List<BookingDate> BookingDateAviable() => _bookingService.BookingDateAviableDb();
+
+        [HttpPost]
+        public bool AddReservation(BookingDate bookingDate) => _bookingService.BookingDateReservedDb(bookingDate);
     }
 }

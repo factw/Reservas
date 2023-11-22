@@ -7,6 +7,7 @@ namespace Repository
     public class BookingRepo : IBookingRepo
     {
         private readonly BookingContext _bookingContext;
+
         public BookingRepo(BookingContext bookingContext)
         {
             _bookingContext = bookingContext;
@@ -15,9 +16,9 @@ namespace Repository
         public List<BookingDate> GetBookingDate() => _bookingContext.BookingTests.ToList();
 
         public bool PostBookingDate(BookingDate booking)
-        {
-            _bookingContext.Add(booking);
-            return _bookingContext.SaveChanges()!=0? true: false;
+        {            
+            _bookingContext.Update(booking);
+            return _bookingContext.SaveChanges() != 0 ? true : false;
         }
     }
 }

@@ -6,5 +6,6 @@ namespace Service
     {
         List<DateTime> BookingAviable();
         List<BookingDate> BookingDateAviableDb();
+        bool BookingDateReservedDb(BookingDate booking);
     }
 }

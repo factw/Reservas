@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BookingContext>(options =>
 {
     options.UseOracle(builder.Configuration.GetConnectionString("DataBaseConnection"));
+    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
 builder.Services.AddScoped<IBookingService, BookingService>();

@@ -11,6 +11,16 @@ namespace Service
             _bookingRepo = bookingRepo;
         }
         public List<BookingDate> BookingDateAviableDb() => _bookingRepo.GetBookingDate();
+        public bool BookingDateReservedDb(BookingDate booking)
+        {
+            var reservationList = _bookingRepo.GetBookingDate();
+            var isAviable = reservationList.Where(re => re.Reservation.Equals(booking.Reservation)).Select(re => re.IsAviable).SingleOrDefault();
+            if (!isAviable)
+            {
+                return false;
+            }
+            return _bookingRepo.PostBookingDate(booking);
+        }
         public List<DateTime> BookingAviable()
         {
 
@@ -34,7 +44,7 @@ namespace Service
                 if (IsBussinesDay(date))
                 {
                     // Generar turnos horarios de una hora
-                    for (int hour = startHour; hour <= endHour - 4; hour+=4)
+                    for (int hour = startHour; hour <= endHour - 4; hour += 4)
                     {
                         availableSlots.Add(new DateTime(date.Year, date.Month, date.Day, hour, 0, 0));
                     }
@@ -44,7 +54,7 @@ namespace Service
             return availableSlots;
         }
 
-        private bool IsBussinesDay(DateTime date) =>  date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday;
-        
+        private bool IsBussinesDay(DateTime date) => date.DayOfWeek != DayOfWeek.Saturday && date.DayOfWeek != DayOfWeek.Sunday;
+
     }
 }
