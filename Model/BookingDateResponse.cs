@@ -2,6 +2,8 @@
 {
     public class BookingDateResponse
     {
-        public DateTime DateAviable { get; set; }
+        public int Id { get; set; }
+        public DateTime Reservation { get; set; }
+        public bool IsAviable { get; set; }
     }
 }

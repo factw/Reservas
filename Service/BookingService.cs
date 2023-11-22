@@ -1,7 +1,16 @@
-﻿namespace Service
+﻿using DB;
+using Repository;
+
+namespace Service
 {
     public class BookingService : IBookingService
     {
+        private readonly IBookingRepo _bookingRepo;
+        public BookingService(IBookingRepo bookingRepo)
+        {
+            _bookingRepo = bookingRepo;
+        }
+        public List<BookingDate> BookingDateAviableDb() => _bookingRepo.GetBookingDate();
         public List<DateTime> BookingAviable()
         {
 
@@ -13,6 +22,8 @@
             return GenerateAvailableSlots(startDate, endDate, startHour, endHour);
 
         }
+
+
         private List<DateTime> GenerateAvailableSlots(DateTime startDate, DateTime endDate, int startHour, int endHour)
         {
             List<DateTime> availableSlots = new List<DateTime>();

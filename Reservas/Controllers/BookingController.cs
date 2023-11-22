@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DB;
+using Microsoft.AspNetCore.Mvc;
 using Service;
 
 namespace Reservas.Controllers
@@ -13,6 +14,6 @@ namespace Reservas.Controllers
             _bookingService = bookingService;
         }
         [HttpGet]
-        public List<DateTime> BookingDateAviable() => _bookingService.BookingAviable();
+        public List<BookingDate> BookingDateAviable() => _bookingService.BookingDateAviableDb();
     }
 }
